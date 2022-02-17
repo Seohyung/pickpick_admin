@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
-    "ra-data-json-server": "^3.19.8",
+    "ra-data-simple-rest": "^3.19.8",
     "react": "^17.0.2",
     "react-admin": "^3.19.8",
     "react-dom": "^17.0.2",
@@ -16,7 +16,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "export PORT=3001 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
