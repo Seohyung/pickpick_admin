@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { fetchUtils, Admin, Resource, ListGuesser } from 'react-admin';
-import { PostList } from './posts';
+import { QuestionList } from './questions';
 import { UserList } from './users';
-// import dataProvider from './dataProvider';
+import dataProvider from './dataProvider';
 import authProvider from './authProvider';
-import simpleRestProvider from 'ra-data-simple-rest';
 
 // const httpClient = (url, options = {}) => {
 //   if (!options.headers) {
@@ -14,11 +13,12 @@ import simpleRestProvider from 'ra-data-simple-rest';
 //   options.headers.set('Authorization', `Bearer ${token}`);
 //   return fetchUtils.fetchJson(url, options);
 // };
-const dataProvider = simpleRestProvider('http://localhost:4000/api/admin/data');
+// const dataProvider = simpleRestProvider('http://localhost:4000/api/admin/data');
 
 const App = () => (
   <Admin dataProvider={dataProvider}>
-    <Resource name='questions' list={ListGuesser} />
+    <Resource name='questions' list={QuestionList} />
+    <Resource name='users' list={UserList} />
   </Admin>
 );
 
