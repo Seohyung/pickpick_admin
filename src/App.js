@@ -4,6 +4,7 @@ import { QuestionList } from './questions';
 import { UserList } from './users';
 import dataProvider from './dataProvider';
 import authProvider from './authProvider';
+import Dashboard from './Dashboard';
 
 // const httpClient = (url, options = {}) => {
 //   if (!options.headers) {
@@ -16,7 +17,11 @@ import authProvider from './authProvider';
 // const dataProvider = simpleRestProvider('http://localhost:4000/api/admin/data');
 
 const App = () => (
-  <Admin dataProvider={dataProvider}>
+  <Admin
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    dashboard={Dashboard}
+  >
     <Resource name='questions' list={QuestionList} />
     <Resource name='users' list={UserList} />
   </Admin>
