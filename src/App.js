@@ -3,7 +3,8 @@ import { fetchUtils, Admin, Resource, ListGuesser } from 'react-admin';
 import { PostList } from './posts';
 import { UserList } from './users';
 // import dataProvider from './dataProvider';
-import authProvider from './authProvider';
+import { authProvider } from './authProvider';
+import Dashboard from './Dashboard';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 // const httpClient = (url, options = {}) => {
@@ -17,7 +18,11 @@ import simpleRestProvider from 'ra-data-simple-rest';
 const dataProvider = simpleRestProvider('http://localhost:4000/api/admin/data');
 
 const App = () => (
-  <Admin dataProvider={dataProvider}>
+  <Admin
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    dashboard={Dashboard}
+  >
     <Resource name='questions' list={ListGuesser} />
   </Admin>
 );
