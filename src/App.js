@@ -3,7 +3,7 @@ import { fetchUtils, Admin, Resource, ListGuesser } from 'react-admin';
 import { QuestionList } from './questions';
 import { UserList } from './users';
 import dataProvider from './dataProvider';
-import authProvider from './authProvider';
+import { authProvider } from './authProvider';
 import Dashboard from './Dashboard';
 
 // const httpClient = (url, options = {}) => {
