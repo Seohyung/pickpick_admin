@@ -1,8 +1,8 @@
 export const authProvider = {
-  login: async ({ username, password }) => {
+  login: async ({ email, password }) => {
     const request = new Request(`http://localhost:4000/api/admin/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
       headers: new Headers({ 'Content-Type': 'application/json' }),
     });
     try {
