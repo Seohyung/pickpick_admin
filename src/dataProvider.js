@@ -1,11 +1,23 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
+import { selectOptions } from '@testing-library/user-event/dist/select-options';
 
 const apiUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:4000/api/admin/data'
     : 'LATER TODO';
-const httpClient = fetchUtils.fetchJson;
+
+const httpClient = (url, options = {}) => {
+  const { token } = JSON.parse(localStorage.auth);
+  console.log(token);
+  if (token) {
+    options.user = {
+      authenticated: true,
+      token: token,
+    };
+    return fetchUtils.fetchJson(url, options);
+  }
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
