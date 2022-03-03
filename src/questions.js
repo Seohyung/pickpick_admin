@@ -5,7 +5,7 @@ export const QuestionList = (props) => (
   <List {...props}>
     <Datagrid rowClick='edit'>
       <TextField source='id' />
-      <TextField source='author' />
+      <TextField source='author.nickname' />
       <TextField source='question' />
       <TextField source='answerA' />
       <ImageField source='imageA' />

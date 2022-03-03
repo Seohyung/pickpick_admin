@@ -13,7 +13,7 @@ export const authProvider = {
         throw new Error(auth.message);
       }
       localStorage.setItem('auth', JSON.stringify(auth));
-
+      console.log(localStorage.auth);
       return await Promise.resolve();
     } catch (err) {
       throw new Error(err.message);
