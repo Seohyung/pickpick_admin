@@ -98,17 +98,19 @@ export default {
 
   deleteMany: async (resource, params) => {
     const ids = params.ids;
-    console.log(ids);
     const query = {
       filter: JSON.stringify(ids),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
     const { json } = await httpClient(url, { method: 'DELETE' });
 
-    const response = {
-      data: json.data.map((resource) => ({ ...resource, id: resource._id })),
-    };
-    return response;
+    if (json.modifiedCount === ids.length) {
+      let response = {
+        data: ids.map((id) => ({ resource, id: id })),
+      };
+      return response;
+    } else {
+      return { resource, message: 'Not modified' };
+    }
   },
 };
