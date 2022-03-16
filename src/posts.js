@@ -14,7 +14,6 @@ export const PostList = (props) => (
       <ReferenceField source='userId' reference='users'>
         <TextField source='name' />
       </ReferenceField>
-
       <TextField source='title' />
       <EditButton />
     </Datagrid>

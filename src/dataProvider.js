@@ -9,7 +9,7 @@ const apiUrl =
 
 const httpClient = (url, options = {}) => {
   const { token } = JSON.parse(localStorage.auth);
-  console.log(token);
+  // console.log(token);
   if (token) {
     options.user = {
       authenticated: true,
@@ -22,6 +22,11 @@ const httpClient = (url, options = {}) => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getList: async (resource, params) => {
+    // console.log('🎃 resource :', resource);
+    // console.log('🎃 params :', params);
+    // console.log('🎃 params.filter :', params.filter);
+    // console.log('🎃 query :', query);
+
     const { page, perPage } = params.pagination;
 
     const query = {
@@ -48,46 +53,6 @@ export default {
     return response;
   },
 
-  // getMany: async (resource, params) => {
-  //   const { ids } = params.ids;
-  //   const query = {
-  //     filter: JSON.stringify({ ids: ids }),
-  //   };
-  //   const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
-  //   const { json } = await httpClient(url);
-
-  //   const response = {
-  //     data: json.data.map((resource) => ({ ...resource, id: resource._id })),
-  //   };
-  //   return response;
-  // },
-
-  //   getManyReference: (resource, params) => {
-  //     const { page, perPage } = params.pagination;
-  //     const { field, order } = params.sort;
-  //     const query = {
-  //       sort: JSON.stringify([field, order]),
-  //       range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-  //       filter: JSON.stringify({
-  //         ...params.filter,
-  //         [params.target]: params.id,
-  //       }),
-  //     };
-  //     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
-  //     return httpClient(url).then(({ headers, json }) => ({
-  //       data: json,
-  //       total: parseInt(headers.get('content-range').split('/').pop(), 10),
-  //     }));
-  //   },
-
-  //   update: (resource, params) => Promise,
-
-  //   updateMany: (resource, params) => Promise,
-
-  //   create: (resource, params) => Promise,
-
   delete: async (resource, params) => {
     console.log(params.id);
     const response = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
@@ -113,4 +78,45 @@ export default {
       return { resource, message: 'Not modified' };
     }
   },
+
+  getMany: async (resource, params) => {
+    const { ids } = params;
+
+    const query = {
+      filter: JSON.stringify({ ids: ids }),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+
+    const { json } = await httpClient(url);
+
+    const response = {
+      data: json.data.map((resource) => ({ ...resource, id: resource._id })),
+    };
+    return response;
+  },
+
+  // getManyReference: (resource, params) => {
+  //   const { page, perPage } = params.pagination;
+  //   const { field, order } = params.sort;
+  //   const query = {
+  //     sort: JSON.stringify([field, order]),
+  //     range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+  //     filter: JSON.stringify({
+  //       ...params.filter,
+  //       [params.target]: params.id,
+  //     }),
+  //   };
+  //   const url = `${apiUrl}/${resource}?${stringify(query)}`;
+
+  //   return httpClient(url).then(({ headers, json }) => ({
+  //     data: json,
+  //     total: parseInt(headers.get('content-range').split('/').pop(), 10),
+  //   }));
+  // },
+
+  //   update: (resource, params) => Promise,
+
+  //   updateMany: (resource, params) => Promise,
+
+  //   create: (resource, params) => Promise,
 };
